@@ -12,14 +12,12 @@ RUN apt-get update && \
         lmodern && \
     rm -rf /var/lib/apt/lists/*
 
-COPY requirements.txt .
+COPY backend/requirements.txt ./requirements.txt
 
 RUN pip install --no-cache-dir -r requirements.txt && \
     python -m spacy download en_core_web_sm
 
-COPY app ./app
+COPY backend/app ./app
 COPY data ./data
-
-EXPOSE 10000
 
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-10000}"]
