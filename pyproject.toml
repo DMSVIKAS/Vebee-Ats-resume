@@ -1,2 +1,14 @@
+[project]
+name = "vebee-ats"
+version = "1.0.0"
+description = "VeeBee ATS Resume Analysis Platform"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi",
+    "uvicorn",
+    "python-multipart",
+    "pydantic",
+]
+
 [tool.vercel]
 entrypoint = "backend.app.main:app"
