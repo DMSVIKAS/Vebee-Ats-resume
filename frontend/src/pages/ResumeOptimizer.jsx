@@ -741,29 +741,31 @@ export default function ResumeOptimizer() {
               PREVIOUS REPORT
               ---------------------------------------------------------- */}
 
-          <div className="panel-heading">
-            <div>
-              <span className="step">
-                PREVIOUS ATS REPORT
-              </span>
+        <div className="panel-heading">
+  <div>
+    <span className="step">
+      JOB DESCRIPTION
+    </span>
 
-              <h3>
-                Upload
-              </h3>
-            </div>
+    <h3>
+      Copy & Paste
+    </h3>
+  </div>
 
-            <span className="muted">
-              Optional
-            </span>
-          </div>
+  <span className="muted">
+    Paste the job description
+  </span>
+</div>
 
-
-          <DocumentUpload
-            label="Upload previous ATS report"
-            value={reportText}
-            onChange={setReportText}
-            optional
-          />
+<textarea
+  className="text-area"
+  value={jdText}
+  onChange={(event) =>
+    setJdText(event.target.value)
+  }
+  placeholder="Paste the complete job description here..."
+  rows={12}
+/>
 
 
           <div className="divider" />
