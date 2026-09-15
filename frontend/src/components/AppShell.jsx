@@ -83,19 +83,23 @@ export default function AppShell({ children }) {
 
       {location.pathname !== '/' && (
         <footer className="footer">
-          <div>
-            <div className="brand footer-brand">
-              <span className="brand-mark small">V</span>
-              <span className="brand-name"><b>Vee</b>Bee</span>
-            </div>
-            <p>AI resume intelligence for candidates who want more than a generic score.</p>
-          </div>
-          <div className="footer-meta">
-            <span>Evidence-first</span>
-            <span>API-ready</span>
-            <span>© 2026 VeeBee</span>
-          </div>
-        </footer>
+  <div>
+    <div className="brand footer-brand">
+      <span className="brand-mark small">V</span>
+      <span className="brand-name"><b>Vee</b>Bee</span>
+    </div>
+
+    <p>
+      AI-powered resume intelligence built for smarter job applications.
+    </p>
+  </div>
+
+  <div className="footer-meta">
+    <span>Built by DMSVIKAS</span>
+    <span>Made with ❤️</span>
+    <span>© 2026 VeeBee</span>
+  </div>
+</footer>
       )}
     </div>
   );
