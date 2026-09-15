@@ -710,29 +710,27 @@ export default function ResumeOptimizer() {
               JD
               ---------------------------------------------------------- */}
 
-          <div className="panel-heading">
-            <div>
-              <span className="step">
-                JOB DESCRIPTION
-              </span>
+         <div className="panel-heading">
+  <div>
+    <span className="step">
+      JOB DESCRIPTION
+    </span>
 
-              <h3>
-                Upload
-              </h3>
-            </div>
+    <h3>
+      Upload
+    </h3>
+  </div>
 
-            <span className="muted">
-              PDF / DOCX / TXT
-            </span>
-          </div>
+  <span className="muted">
+    PDF / DOCX / TXT
+  </span>
+</div>
 
-
-          <DocumentUpload
-            label="Upload job description"
-            value={jdText}
-            onChange={setJdText}
-          />
-
+<DocumentUpload
+  label="Upload job description"
+  value={jdText}
+  onChange={setJdText}
+/>
 
           <div className="divider" />
 
