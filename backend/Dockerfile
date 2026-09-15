@@ -18,6 +18,6 @@ RUN pip install --no-cache-dir -r requirements.txt && \
     python -m spacy download en_core_web_sm
 
 COPY backend/app ./app
-COPY data ./data
+COPY data /data
 
 CMD ["sh", "-c", "uvicorn app.main:app --host 0.0.0.0 --port ${PORT:-10000}"]
