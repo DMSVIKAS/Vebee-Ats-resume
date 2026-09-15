@@ -269,7 +269,7 @@ function JobDescriptionInput({
           Paste
         </button>
       </div>
-
+<div style={{ height: '10px' }} />
       {method === 'upload' ? (
         <DocumentUpload
           label="Upload job description"
