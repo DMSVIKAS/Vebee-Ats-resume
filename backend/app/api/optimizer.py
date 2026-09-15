@@ -1524,17 +1524,13 @@ if not pdflatex:
                 + output[-7000:]
             )
 
-        pdf_file = (
-            workdir / "resume.pdf"
-        )
+            ...
+    pdf_file = output_dir / "resume.pdf"
 
-        if not pdf_file.exists():
+    if not pdf_file.exists():
+        raise RuntimeError("PDF generation failed.")
 
-            raise RuntimeError(
-                "LaTeX completed but no PDF was produced."
-            )
-
-        return pdf_file.read_bytes()
+    return pdf_file.read_bytes()
 
 
 # ============================================================================
