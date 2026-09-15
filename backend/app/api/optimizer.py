@@ -1467,16 +1467,12 @@ def compile_latex(
     latex_source: str,
 ) -> bytes:
 
-    pdflatex = shutil.which(
-        "pdflatex"
+   pdflatex = shutil.which("pdflatex")
+
+if not pdflatex:
+    raise RuntimeError(
+        "pdflatex is not installed on the server."
     )
-
-    if not pdflatex:
-
-        pdflatex = (
-            r"C:\Program Files\MiKTeX"
-            r"\miktex\bin\x64\pdflatex.exe"
-        )
 
     if not Path(pdflatex).exists():
 
