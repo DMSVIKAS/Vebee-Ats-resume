@@ -246,7 +246,7 @@ function JobDescriptionInput({
   value,
   onChange,
 }) {
-  const [method, setMethod] = useState('upload');
+  const [method, setMethod] = useState('paste');
 
   return (
     <div>
