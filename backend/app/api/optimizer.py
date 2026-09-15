@@ -1466,29 +1466,22 @@ def build_pdf_latex(
 def compile_latex(
     latex_source: str,
 ) -> bytes:
+    pdflatex = shutil.which("pdflatex")
 
-   pdflatex = shutil.which("pdflatex")
-
-if not pdflatex:
-    raise RuntimeError(
-        "pdflatex is not installed on the server."
-    )
+    if not pdflatex:
+        raise RuntimeError(
+            "pdflatex is not installed on the server."
+        )
 
     if not Path(pdflatex).exists():
-
         raise RuntimeError(
-            "MiKTeX pdflatex.exe could not be found."
+            "pdflatex executable could not be found."
         )
 
     with tempfile.TemporaryDirectory() as temp_dir:
+        workdir = Path(temp_dir)
 
-        workdir = Path(
-            temp_dir
-        )
-
-        tex_file = (
-            workdir / "resume.tex"
-        )
+        tex_file = workdir / "resume.tex"
 
         tex_file.write_text(
             latex_source,
@@ -1512,7 +1505,6 @@ if not pdflatex:
         )
 
         if first.returncode != 0:
-
             output = (
                 first.stdout
                 + "\n"
@@ -1524,13 +1516,14 @@ if not pdflatex:
                 + output[-7000:]
             )
 
-            ...
-    pdf_file = output_dir / "resume.pdf"
+        pdf_file = workdir / "resume.pdf"
 
-    if not pdf_file.exists():
-        raise RuntimeError("PDF generation failed.")
+        if not pdf_file.exists():
+            raise RuntimeError(
+                "PDF generation failed."
+            )
 
-    return pdf_file.read_bytes()
+        return pdf_file.read_bytes()
 
 
 # ============================================================================
