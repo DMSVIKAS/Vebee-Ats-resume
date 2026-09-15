@@ -1,0 +1,207 @@
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Twenty One Seconds Resume/CV
+% LaTeX Template
+% Version 1.2 (2024/06/26)
+%
+% This template has been downloaded from:
+% http://www.LaTeXTemplates.com
+%
+%
+% License
+% Original author:
+% Carmine Spagnuolo (cspagnuolo@unisa.it) with major modifications by 
+% Alessandro Trinca Tornidor (alessandro at trinca dot tornidor dot com)
+%% Copyright 2022-now Alessandro Trinca Tornidor (alessandro at trinca dot tornidor dot com)
+%
+% This work may be distributed and/or modified under the
+% conditions of the LaTeX Project Public License, either version 1.3
+% of this license or (at your option) any later version.
+% The latest version of this license is in
+%   http://www.latex-project.org/lppl.txt
+% and version 1.3 or later is part of all distributions of LaTeX
+% version 2005/12/01 or later.
+%
+% This work has the LPPL maintenance status `maintained'.
+% 
+% The Current Maintainer of this work is Alessandro Trinca Tornidor
+%
+% This work consists of the files template.tex and twentyonesecondcv.cls
+% and the derived file twentyonesecondcv.pdf
+%
+% see https://github.com/trincadev/cv-latex-twentyoneseconds/ for updates
+
+%----------------------------------------------------------------------------------------
+%	PACKAGES AND OTHER DOCUMENT CONFIGURATIONS
+%----------------------------------------------------------------------------------------
+
+\documentclass[letterpaper]{twentyonesecondcv} % a4paper for A4
+
+\profilepic{image.png} % Profile picture
+\cvjobtitle{Job Description and Career} % Job title/career
+\cvname{Name Surname} % Your name
+
+%% Mandatory informations used by \makeinfoprofile. To hide these fields leave the contents of the macro empty (e.g. '\cvsitepersonal{}' instead than '\cvsitepersonal{en.wikipedia.org}')
+%% See https://tex.stackexchange.com/a/692525/109031
+\cvbirthdate{15 August 1980}
+\cvnumberphone{+01 2345678901}
+\cvaddressurl{www.google.com/maps/place/Roma+RM/@41.9099533,12.371191,11z/}
+\cvaddress{Address, Nation}        % Short address/location, use \newline if more than 1 line is required
+\cvsitepersonal{www.example.com}       % personal site
+\cvstackoverflow{9999999999876}
+\cvlinkedin{name-surname-linkedin}
+\cvskypeurlbase{join.skype.com/invite/id-random-skype-invite} % Skype 
+\cvskypeurl{name-surname-skype}
+\cvgithub{name-surname-github}     
+\cvmail{name@surname.com}
+
+\textfootersidenote{A side footer text that appears on two pages...}{on two rows.}
+
+\pagenumber{...Page}{of}
+
+\begin{document}
+\sidesection{
+    \makeheaderprofile
+    % \makeheaderprofilenoimg
+    \makeinfoprofile
+    \aboutme{Short section about myself.}
+    \customsidesection{Header profile section}{It's possible to hide the profile picture using \textbackslash\texttt{makeheaderprofilenoimg} instead than \textbackslash\texttt{makeheaderprofile} (you could remove  \textbackslash\texttt{profilepic\{image.png\}} then).}
+    \customsidesection{Info profile section}{The command \textbackslash\texttt{makeinfoprofile} doesn't use empty macros \textbackslash\texttt{cvsite*\{\}} (e.g. \textbackslash\texttt{cvsitepersonal\{\}} instead than \textbackslash\texttt{cvsitepersonal\{example.com\}}).}
+    \customsidesection{About the info profile commands}{If not empty the \textbackslash\texttt{cvaddressurl\{\}} command create a custom hyperlink containing the \textbackslash\texttt{cvaddress\{Address, Nation\}} text. Same for \textbackslash\texttt{cvskypeurlbase\{join.skype.com/...\}} and \textbackslash\texttt{cvskypeurl\{skype-username\}} (visit \colorhrefcustom{https://support.skype.com/en/faq/FA34802/}{skype FAQs}) to create an invite url.}
+    
+    \makefootersidenodevfill
+    
+}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% for some reason it's impossible to have a new line here...
+\mainsection{
+    
+    \section{Bibliography}
+
+    Three different commands:
+
+    \begin{itemize}
+      \item A \textbf{bold word} made with the \textbackslash\texttt{textbf\{\}}
+      \item A \graytext{gray phrase} made with the \textbackslash\texttt{graytext\{\}} command instead than overriding \textbackslash\texttt{bfseries} like before
+      \item A \textcolor{red}{red phrase} made with the \textbackslash\texttt{textcolor\{\}\{\}} command (the first argument is the color, the second one is the text).
+    \end{itemize}
+    
+    \section{Education}
+    
+    \begin{twenty}
+      \twentyitem
+        {1990 - 1995}
+        {Ph.D. {\normalfont candidate in Computer Science}}
+        {University three}
+        {Aenean vitae faucibus dolor. Donec leo dui, varius vel pharetra sit amet, aliquet tincidunt purus. Vivamus nulla enim, facilisis vel mi eget, elementum tincidunt felis. In id nibh sit amet lorem mollis congue. Quisque sit amet sagittis tortor. Sed elementum ornare nunc, gravida porta dui lobortis id. Aenean ullamcorper blandit porta. Morbi in urna pharetra, facilisis quam eu, condimentum mauris. Fusce eleifend purus ligula. Praesent sollicitudin, mauris ut lobortis tristique, mi tortor efficitur dolor, id cursus massa massa at lacus. Etiam eu sapien condimentum, cursus velit non, viverra felis. Etiam sagittis nec. Praesent id tincidunt quam. Morbi pharetra, lorem non faucibus vestibulum. Ut non nulla pellentesque, vestibulum lorem in, vehicula velit.}
+      \twentyitem
+        {1980}
+        {M.Sc. magna cum laude}
+        {University two}
+        {Majoring in Computer Science. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Quisque viverra in est id scelerisque. Vestibulum id dolor tellus. Nulla quis magna nunc. Suspendisse non ex vel quam tincidunt tincidunt a bibendum erat. Proin convallis, diam quis egestas faucibus, arcu ipsum sagittis lacus, non lobortis nibh turpis eget odio. Nullam porta neque lorem, at tincidunt lectus pharetra eget.}
+      \twentyitem
+        {1970-1976}
+        {B.Sc. magna cum laude}
+        {University one}
+        {Majoring in Computer Science... Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit a nisi nec fermentum. Praesent sed leo fringilla, eleifend diam vel, ultricies mauris. Nunc interdum diam vel magna egestas posuere. Mauris sodales urna vitae neque imperdiet tempus. Nunc rhoncus a nunc ac varius. Integer condimentum sit amet dui sed fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit a nisi nec fermentum. Praesent sed leo fringilla, eleifend diam vel, ultricies mauris. Nunc interdum diam vel magna egestas posuere. Mauris sodales urna vitae neque imperdiet tempus. Nunc rhoncus a nunc ac varius. Integer condimentum sit amet dui sed fringilla.}
+      \twentyitem
+        {1955 - 1060}
+        {High school}
+        {Hhigh School}
+        {Specializing in mathematics and physics.}
+    \end{twenty}
+    
+    \section{Other Education and certifications}
+    
+    \begin{twentymid} % Environment for a list with descriptions  
+        \twentymiditem{since 2020}{I learned some interesting things on this \colorhrefcustom{https://wikipedia.it}{website}, then I moved on.}{Org}
+        \twentymiditem{10/2015}{I added some fancy pages on \colorhref{wikipedia.org}}{Org 2}
+        \twentymiditem{1990 - 2015}{Second list element. Nunc rhoncus a nunc ac varius. Integer condimentum sit amet dui sed fringilla.}{Organization name}
+        \twentymiditem{12/1998}{Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit a nisi nec fermentum. Praesent sed leo fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit a nisi nec fermentum. Praesent sed leo fringilla}{\colorhrefcustom{https://commons.wikimedia.org/wiki/Main_Page}{wikipedia}}
+    \end{twentymid}
+    
+    \section{Awards}
+    
+    \begin{twentyshort}
+      \twentyitemshort
+        {1987}
+        {Some Fantasy Novel.}
+      \twentyitemshort
+        {1998}
+        {Some Essay.}
+    \end{twentyshort}
+
+%% end main section
+}
+% \newpage
+
+\clearpage  % mandatory to make it work the command '\pagenumber'
+
+% \noindent
+\sidesection{
+    \makeheaderprofilenoimg
+    \customsidesection{Side footer}{Now there are three commands to populate the side footer:
+
+    \begin{itemize}
+      \item \textbackslash\texttt{makefooterprofile}, the old way to create a custom side footer (it takes two mandatory arguments)
+      \item \textbackslash\texttt{makefootersidenode}, useful for creating the same footer on all existing pages
+      \item \textbackslash\texttt{makefootersidenodevfill}
+    \end{itemize}
+
+    Use the commands \textbackslash\texttt{pagenumber}\{\}\{\} and \textbackslash\texttt{textfootersidenote}\{\}\{\} to add the page number (e.g. "Page 2 of 2") and the side footer text.
+    }
+
+    \customsidesection{Progress bar skill sections}{The command \textbackslash\texttt{customskills\{Section title\}\{\{\},\{\},\{\}\}\{\}} take three argument (the last one is optional). The first argument is the section title, e.g. \texttt{Languages}. The second macro argument is an array of couples made by words and float numbers separated by slashes, e.g. \texttt{\{\{Latin/4.3\},\{Greek/6\}\}}; the number of course represents how much the skill ability is high. This array separator is a comma. Note that the array order is reversed: in the output list created by the example above has the word "Greek" before "Latin".}
+    
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    %%%%%%Skill bar section, each skill must have a value between 0 an 6 (float)%%%%%%%
+    %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    \customskills{Languages skill}{{Latin/4},{Greek/6}}{}
+
+    \customskills{Card games}{{Black Jack/5},{Freecell/2},{Spider/3}}{Scale: 0 (basic skills) - 6 (expert).}
+    
+    \makefooterprofile{Alternative footer note (only on page two), row one.}{Alt. footer note (row two)...}
+    
+    \makefootersidenode
+    
+}
+% %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% for some reason there is no way to have a new line here...
+\mainsection{
+    
+    \section{Experiences}
+    
+    \begin{twenty}
+      \twentyitem
+        {since 2019}
+        {My last work experience}
+        {Work company}
+        {Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit a nisi nec fermentum. Praesent sed leo fringilla, eleifend diam vel, ultricies mauris. Nunc interdum diam vel magna egestas posuere. Mauris sodales urna vitae neque imperdiet tempus. Nunc rhoncus a nunc ac varius. Integer condimentum sit amet dui sed fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit a nisi nec fermentum. Praesent sed leo fringilla, eleifend diam vel, ultricies mauris. Nunc interdum diam vel magna egestas posuere. Mauris sodales urna vitae neque imperdiet tempus. Nunc rhoncus a nunc ac varius. Integer condimentum sit amet dui sed fringilla.}
+      \twentyitem
+        {1993}
+        {Other side work.}
+        {ACME Corp.}
+        {Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit a nisi nec fermentum. Praesent sed leo fringilla.}
+    \twentyitem
+        {07/1993}
+        {Side work.}
+        {ACME Corp.}
+        {Nunc interdum diam vel magna egestas posuere. Mauris sodales urna vitae neque imperdiet tempus. Nunc rhoncus a nunc ac varius. Integer condimentum sit amet dui sed fringilla. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit a nisi nec fermentum. Praesent sed leo fringilla, eleifend diam vel, ultricies mauris. Nunc interdum diam vel magna egestas posuere. Mauris sodales urna vitae neque imperdiet tempus. Nunc rhoncus a nunc ac varius. Integer condimentum sit amet dui sed fringilla.}
+    \twentyitem
+        {1981}
+        {My first work experience.}
+        {Convenience Store}
+        {Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nulla suscipit a nisi nec fermentum. Praesent sed leo fringilla, eleifend diam vel, ultricies mauris.}
+    \end{twenty}
+    
+    \section{Other informations}
+    
+    Other information section. In sed ligula a turpis tristique interdum a ut risus. Nullam at euismod leo, ac molestie urna. Curabitur enim felis, ultricies quis dui ac, bibendum auctor dui. Proin aliquet nulla arcu, at pulvinar eros eleifend at. Aliquam erat volutpat. Duis augue mauris, aliquam sit amet lacinia ut, egestas sit amet est. Aliquam erat lacus, scelerisque non laoreet eu, commodo eget turpis. Nunc nunc mauris, lacinia sed semper quis, venenatis eget enim. Proin viverra in nibh at tincidunt.
+    
+    Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec euismod id nisi nec dapibus. Nunc sed cursus nisi, in feugiat elit. Orci varius natoque penatibus et magnis dis parturient montes, nascetur ridiculus mus. Praesent dictum vehicula est non dapibus. Praesent id tincidunt quam. Morbi pharetra, lorem non faucibus vestibulum, turpis eros blandit felis, at mollis diam metus in elit. In venenatis pharetra leo vel elementum. Lorem ipsum dolor sit amet, consectetur adipiscing elit. Ut non nulla pellentesque, vestibulum lorem in, vehicula velit. Integer vitae fringilla ipsum. Donec vel pretium libero.
+    
+    In sed ligula a turpis tristique interdum a ut risus. Nullam at euismod leo, ac molestie urna. Curabitur enim felis, ultricies quis dui ac, bibendum auctor dui. Proin aliquet nulla arcu, at pulvinar eros eleifend at. Aliquam erat volutpat. Duis augue mauris, aliquam sit amet lacinia ut, egestas sit amet est. Aliquam erat lacus, scelerisque non laoreet eu, commodo eget turpis. Nunc nunc mauris, lacinia sed semper quis, venenatis eget enim. Proin viverra in nibh at tincidunt.
+    
+    Integer molestie, lectus in vehicula consequat, mauris nisi dignissim lacus, et vestibulum ante nisl eu ante. In laoreet eros sit amet justo tempor maximus. Cras quam velit, feugiat vel risus vitae, tincidunt elementum.
+
+}
+\end{document}

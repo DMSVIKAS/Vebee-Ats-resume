@@ -1,0 +1,22 @@
+{
+  "name": "veebee-ats",
+  "private": true,
+  "version": "0.2.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite",
+    "build": "vite build",
+    "preview": "vite preview"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "react": "latest",
+    "react-dom": "latest",
+    "react-router-dom": "latest",
+    "lucide-react": "latest",
+    "mammoth": "^1.10.0",
+    "pdfjs-dist": "^5.4.149"
+  },
+  "devDependencies": {}
+}

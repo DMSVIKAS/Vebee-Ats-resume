@@ -1,0 +1,150 @@
+# =========================
+# ENVIRONMENT / SECRETS
+# =========================
+.env
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+*.env
+
+# =========================
+# NODE / FRONTEND
+# =========================
+node_modules/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+
+dist/
+build/
+.vite/
+
+# =========================
+# PYTHON / FASTAPI BACKEND
+# =========================
+__pycache__/
+*.py[cod]
+*$py.class
+
+.venv/
+venv/
+env/
+ENV/
+
+.pytest_cache/
+.mypy_cache/
+.ruff_cache/
+
+*.egg
+*.egg-info/
+.eggs/
+pip-wheel-metadata/
+
+# =========================
+# PYTHON ENV / LOCAL CONFIG
+# =========================
+.python-version
+.coverage
+.coverage.*
+htmlcov/
+.pyre/
+
+# =========================
+# DATABASE / LOCAL DATA
+# =========================
+*.db
+*.sqlite
+*.sqlite3
+
+data/
+logs/
+*.log
+
+# =========================
+# UPLOADED RESUMES / JDs
+# =========================
+uploads/
+uploaded_files/
+user_uploads/
+resumes/
+resume_uploads/
+jd_uploads/
+job_descriptions/
+
+# Don't accidentally commit resume files
+*.pdf
+*.doc
+*.docx
+
+# =========================
+# ML / AI GENERATED FILES
+# =========================
+*.pkl
+*.pickle
+*.joblib
+*.h5
+*.hdf5
+*.keras
+*.onnx
+*.pt
+*.pth
+*.bin
+
+models/
+trained_models/
+checkpoints/
+
+# =========================
+# GENERATED REPORTS
+# =========================
+reports/
+generated_reports/
+output/
+outputs/
+generated/
+temp/
+tmp/
+
+# Generated LaTeX files
+*.aux
+*.log
+*.out
+*.toc
+*.fls
+*.fdb_latexmk
+*.synctex.gz
+
+# =========================
+# IDE / EDITORS
+# =========================
+.vscode/
+.idea/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db
+
+# =========================
+# TEST / CACHE FILES
+# =========================
+.pytest_cache/
+.cache/
+.mypy_cache/
+
+# =========================
+# OS FILES
+# =========================
+.DS_Store
+.DS_Store?
+._*
+.Spotlight-V100
+.Trashes
+ehthumbs.db
+Desktop.ini
+
+# =========================
+# GIT
+# =========================
+*.orig
