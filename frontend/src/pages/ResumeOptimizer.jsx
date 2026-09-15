@@ -239,6 +239,65 @@ function DocumentUpload({
 
 
 /* ============================================================================
+   JOB DESCRIPTION INPUT
+   ========================================================================== */
+
+function JobDescriptionInput({
+  value,
+  onChange,
+}) {
+  const [method, setMethod] = useState('upload');
+
+  return (
+    <div>
+      <div className="segmented">
+        <button
+          type="button"
+          className={method === 'upload' ? 'selected' : ''}
+          onClick={() => setMethod('upload')}
+        >
+          <UploadCloud size={15} />
+          Upload
+        </button>
+
+        <button
+          type="button"
+          className={method === 'paste' ? 'selected' : ''}
+          onClick={() => setMethod('paste')}
+        >
+          <FileText size={15} />
+          Paste
+        </button>
+      </div>
+
+      {method === 'upload' ? (
+        <DocumentUpload
+          label="Upload job description"
+          value={value}
+          onChange={onChange}
+        />
+      ) : (
+        <textarea
+          className="text-area"
+          value={value}
+          onChange={(event) => onChange(event.target.value)}
+          placeholder="Paste the complete job description here..."
+          rows={12}
+          style={{
+            width: '100%',
+            minHeight: '260px',
+            resize: 'vertical',
+            boxSizing: 'border-box',
+            marginTop: '12px',
+          }}
+        />
+      )}
+    </div>
+  );
+}
+
+
+/* ============================================================================
    PDF DOWNLOAD
    ========================================================================== */
 
@@ -409,7 +468,7 @@ export default function ResumeOptimizer() {
 
     if (!jdText.trim()) {
       setError(
-        'Upload a readable job description first.',
+        'Upload or paste a readable job description first.',
       );
 
       setStatus('error');
@@ -717,18 +776,17 @@ export default function ResumeOptimizer() {
               </span>
 
               <h3>
-                Upload
+                Upload or Paste
               </h3>
             </div>
 
             <span className="muted">
-              PDF / DOCX / TXT
+              PDF / DOCX / TXT or text
             </span>
           </div>
 
 
-          <DocumentUpload
-            label="Upload job description"
+          <JobDescriptionInput
             value={jdText}
             onChange={setJdText}
           />
@@ -889,7 +947,7 @@ export default function ResumeOptimizer() {
           {status === 'idle' && (
             <EmptyState
               title="Your optimization plan is waiting"
-              body="Upload a resume and job description to see section-level recommendations and generate the optimized PDF."
+              body="Upload a resume, then upload or paste a job description to see section-level recommendations and generate the optimized PDF."
             />
           )}
 
