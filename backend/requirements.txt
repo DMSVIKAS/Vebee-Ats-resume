@@ -1,22 +1,54 @@
+# =========================
+# Web API
+# =========================
 fastapi[standard]
-spacy
-python-multipart
+uvicorn
 
+# =========================
+# Configuration / Environment
+# =========================
+python-dotenv
+
+# =========================
+# File Upload / Parsing
+# =========================
+python-multipart
 pypdf
 python-docx
 
+# =========================
+# Data / Scientific Computing
+# =========================
 numpy
 pandas
+scipy
 
+# =========================
+# Machine Learning
+# =========================
 scikit-learn
 xgboost
 lightgbm
 joblib
 
+# =========================
+# NLP / spaCy
+# =========================
+spacy
+
+# =========================
+# Embeddings / Transformers
+# =========================
 sentence-transformers
+transformers
+torch
 
+# =========================
+# OpenAI / LLM
+# =========================
+openai
+
+# =========================
+# Database
+# =========================
 pymongo
-
-python-dotenv
-
-scipy
