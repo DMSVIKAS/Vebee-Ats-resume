@@ -286,6 +286,42 @@ def save_canonical_candidates() -> list[dict[str, Any]]:
     return candidates
 
 
-CANONICAL_SKILLS = (
-    save_canonical_candidates()
-)
+def load_canonical_skills() -> list[dict[str, Any]]:
+    """
+    Load the already-generated canonical skill dataset.
+
+    Generate it only when the processed file does not exist.
+    This prevents expensive dataset processing during every
+    application startup.
+    """
+
+    if OUTPUT_PATH.exists():
+        try:
+            with OUTPUT_PATH.open(
+                "r",
+                encoding="utf-8",
+            ) as file:
+                data = json.load(file)
+
+            skills = data.get(
+                "skills",
+                [],
+            )
+
+            if isinstance(skills, list):
+                return [
+                    item
+                    for item in skills
+                    if isinstance(item, dict)
+                ]
+
+        except (
+            OSError,
+            json.JSONDecodeError,
+        ):
+            pass
+
+    return save_canonical_candidates()
+
+
+CANONICAL_SKILLS = load_canonical_skills()
