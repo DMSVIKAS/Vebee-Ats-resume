@@ -52,3 +52,8 @@ openai
 # Database
 # =========================
 pymongo
+
+
+#==========================
+PyMuPDF
+python-docx
