@@ -4,6 +4,8 @@ from io import BytesIO
 import fitz
 from docx import Document
 from fastapi import APIRouter, File, HTTPException, UploadFile
+import pytesseract
+from PIL import Image
 
 
 router = APIRouter(
