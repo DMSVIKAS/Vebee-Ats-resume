@@ -52,10 +52,3 @@ openai
 # Database
 # =========================
 pymongo
-
-
-#==========================
-PyMuPDF
-python-docx
-pytesseract
-Pillow
