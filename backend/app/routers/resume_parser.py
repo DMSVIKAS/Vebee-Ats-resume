@@ -1,10 +1,9 @@
-
 from io import BytesIO
 
 import fitz
+import pytesseract
 from docx import Document
 from fastapi import APIRouter, File, HTTPException, UploadFile
-import pytesseract
 from PIL import Image
 
 
@@ -18,7 +17,7 @@ MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
 
 
 def extract_pdf_text(file_bytes: bytes) -> str:
-    """Extract text from a PDF using PyMuPDF."""
+    """Extract text from a PDF, with OCR fallback for scanned PDFs."""
 
     try:
         pdf = fitz.open(
@@ -26,18 +25,56 @@ def extract_pdf_text(file_bytes: bytes) -> str:
             filetype="pdf",
         )
 
+        # ---------------------------------------------------------
+        # 1. Try normal text extraction first
+        # ---------------------------------------------------------
         pages = []
 
         for page in pdf:
             text = page.get_text("text")
 
-            if text:
+            if text and text.strip():
                 pages.append(text.strip())
+
+        text = "\n\n".join(
+            page for page in pages if page
+        ).strip()
+
+        # Normal text-based PDF
+        if text:
+            pdf.close()
+            return text
+
+        # ---------------------------------------------------------
+        # 2. No text found → OCR scanned/image PDF
+        # ---------------------------------------------------------
+        ocr_pages = []
+
+        for page in pdf:
+            pixmap = page.get_pixmap(
+                dpi=150,
+                alpha=False,
+            )
+
+            image = Image.open(
+                BytesIO(
+                    pixmap.tobytes("png")
+                )
+            )
+
+            ocr_text = pytesseract.image_to_string(
+                image
+            )
+
+            if ocr_text and ocr_text.strip():
+                ocr_pages.append(
+                    ocr_text.strip()
+                )
 
         pdf.close()
 
         return "\n\n".join(
-            page for page in pages if page
+            ocr_pages
         ).strip()
 
     except Exception as exc:
@@ -61,7 +98,9 @@ def extract_docx_text(file_bytes: bytes) -> str:
             if paragraph.text.strip()
         ]
 
-        return "\n".join(paragraphs).strip()
+        return "\n".join(
+            paragraphs
+        ).strip()
 
     except Exception as exc:
         raise HTTPException(
@@ -93,8 +132,8 @@ async def extract_resume(
     """
     Extract resume text from PDF, DOCX, or TXT.
 
-    This endpoint performs document parsing on the backend
-    so mobile browsers do not need to run PDF.js.
+    PDF extraction uses PyMuPDF first and
+    Tesseract OCR for scanned/image-only PDFs.
     """
 
     filename = file.filename or ""
@@ -132,24 +171,33 @@ async def extract_resume(
     if len(file_bytes) > MAX_FILE_SIZE:
         raise HTTPException(
             status_code=413,
-            detail="File is too large. Maximum size is 10 MB.",
+            detail=(
+                "File is too large. "
+                "Maximum size is 10 MB."
+            ),
         )
 
     if extension == "pdf":
-        text = extract_pdf_text(file_bytes)
+        text = extract_pdf_text(
+            file_bytes
+        )
 
     elif extension == "docx":
-        text = extract_docx_text(file_bytes)
+        text = extract_docx_text(
+            file_bytes
+        )
 
     else:
-        text = extract_txt_text(file_bytes)
+        text = extract_txt_text(
+            file_bytes
+        )
 
     if not text:
         raise HTTPException(
             status_code=422,
             detail=(
                 "No readable text was found in this file. "
-                "If this is a scanned PDF, OCR support is required."
+                "OCR could not extract any text."
             ),
         )
 
