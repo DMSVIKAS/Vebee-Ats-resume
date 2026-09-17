@@ -972,8 +972,61 @@ def build_optimization(
 # ============================================================================
 
 def escape_latex(value: Any) -> str:
+    """
+    Convert user-provided text into LaTeX-safe text.
+
+    Removes hidden control characters that can crash pdflatex,
+    while preserving normal Unicode text and standard formatting.
+    """
     text = to_text(value)
 
+    # ---------------------------------------------------------
+    # Remove hidden control characters
+    # ---------------------------------------------------------
+    # LaTeX cannot process characters such as:
+    # U+0011 -> displayed by pdflatex as ^^Q
+    #
+    # Keep newline and tab because they are harmless whitespace.
+    cleaned = []
+
+    for character in text:
+        code = ord(character)
+
+        if code < 32 and character not in "\n\t":
+            cleaned.append(" ")
+        elif code == 127:
+            cleaned.append(" ")
+        else:
+            cleaned.append(character)
+
+    text = "".join(cleaned)
+
+    # ---------------------------------------------------------
+    # Replace common Unicode characters with LaTeX-safe forms
+    # ---------------------------------------------------------
+    unicode_replacements = {
+        "\u00a0": " ",
+        "\u2013": "--",       # en dash
+        "\u2014": "---",      # em dash
+        "\u2018": "'",        # left single quote
+        "\u2019": "'",        # right single quote
+        "\u201c": '"',        # left double quote
+        "\u201d": '"',        # right double quote
+        "\u2022": "-",        # bullet
+        "\u2026": "...",      # ellipsis
+        "\u2212": "-",        # minus sign
+        "\u00d7": "x",        # multiplication sign
+        "\u00bd": "1/2",
+        "\u00bc": "1/4",
+        "\u00be": "3/4",
+    }
+
+    for old, new in unicode_replacements.items():
+        text = text.replace(old, new)
+
+    # ---------------------------------------------------------
+    # Escape LaTeX special characters
+    # ---------------------------------------------------------
     replacements = {
         "\\": r"\textbackslash{}",
         "&": r"\&",
@@ -990,7 +1043,6 @@ def escape_latex(value: Any) -> str:
     result = []
 
     for character in text:
-
         result.append(
             replacements.get(
                 character,
@@ -999,7 +1051,6 @@ def escape_latex(value: Any) -> str:
         )
 
     return "".join(result)
-
 
 # ============================================================================
 # RESUME PDF RENDERING
