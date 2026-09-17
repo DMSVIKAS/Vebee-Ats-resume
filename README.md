@@ -1,3 +1,4 @@
+
 # 🚀 VeeBee ATS
 
 ### AI-Powered Resume Intelligence & Job Matching Platform
@@ -114,6 +115,13 @@ VeeBee provides multiple LaTeX resume templates that can be downloaded and used 
 - GitHub — Source Code
 
 ---
+
+<img width="1086" height="1448" alt="ChatGPT Image Sep 15, 2026, 11_01_56 PM" src="https://github.com/user-attachments/assets/c41dfc0f-fe61-4fa2-aa3a-631ffb12da23" />
+<img width="1086" height="1448" alt="ChatGPT Image Sep 15, 2026, 11_03_05 PM" src="https://github.com/user-attachments/assets/41c3e59f-4fcc-495b-8458-4295b278192a" />
+<img width="1086" height="1448" alt="ChatGPT Image Sep 15, 2026, 11_04_46 PM" src="https://github.com/user-attachments/assets/85a89d41-19d5-4b1e-a2e7-6185320375cd" />
+<img width="1254" height="1254" alt="ChatGPT Image Sep 15, 2026, 10_58_37 PM" src="https://github.com/user-attachments/assets/89b62a6a-a956-4340-be35-e41b55a19864" />
+<img width="1086" height="1448" alt="ChatGPT Image Sep 15, 2026, 10_59_42 PM" src="https://github.com/user-attachments/assets/76933fa1-dc30-4e0c-98b6-1dad293e0475" />
+<img width="1086" height="1448" alt="ChatGPT Image Sep 15, 2026, 11_00_50 PM" src="https://github.com/user-attachments/assets/af8f4895-03eb-4677-a87e-ec00c746631d" />
 
 ## 🏗️ Project Structure
 
