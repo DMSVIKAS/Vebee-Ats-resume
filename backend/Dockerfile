@@ -10,7 +10,8 @@ RUN apt-get update && \
         texlive-latex-base \
         texlive-latex-recommended \
         texlive-latex-extra \
-        lmodern && \
+        lmodern \
+tesseract-ocr && \
     rm -rf /var/lib/apt/lists/*
 
 COPY backend/requirements.txt ./requirements.txt
