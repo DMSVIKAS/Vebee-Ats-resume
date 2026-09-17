@@ -6,18 +6,13 @@ from docx import Document
 from fastapi import APIRouter, File, HTTPException, UploadFile
 from PIL import Image
 
+router = APIRouter(prefix="/resume", tags=["Resume Parser"])
 
-router = APIRouter(
-    prefix="/resume",
-    tags=["Resume Parser"],
-)
-
-
-MAX_FILE_SIZE = 10 * 1024 * 1024  # 10 MB
+MAX_FILE_SIZE = 10 * 1024 * 1024
 
 
 def extract_pdf_text(file_bytes: bytes) -> str:
-    """Extract text from a PDF, with OCR fallback for scanned PDFs."""
+    """Extract text from PDF. OCR scanned pages when needed."""
 
     try:
         pdf = fitz.open(
@@ -25,32 +20,18 @@ def extract_pdf_text(file_bytes: bytes) -> str:
             filetype="pdf",
         )
 
-        # ---------------------------------------------------------
-        # 1. Try normal text extraction first
-        # ---------------------------------------------------------
         pages = []
 
         for page in pdf:
+
+            # First try normal PDF text extraction
             text = page.get_text("text")
 
             if text and text.strip():
                 pages.append(text.strip())
+                continue
 
-        text = "\n\n".join(
-            page for page in pages if page
-        ).strip()
-
-        # Normal text-based PDF
-        if text:
-            pdf.close()
-            return text
-
-        # ---------------------------------------------------------
-        # 2. No text found → OCR scanned/image PDF
-        # ---------------------------------------------------------
-        ocr_pages = []
-
-        for page in pdf:
+            # If this page has no text, OCR it
             pixmap = page.get_pixmap(
                 dpi=150,
                 alpha=False,
@@ -67,15 +48,13 @@ def extract_pdf_text(file_bytes: bytes) -> str:
             )
 
             if ocr_text and ocr_text.strip():
-                ocr_pages.append(
+                pages.append(
                     ocr_text.strip()
                 )
 
         pdf.close()
 
-        return "\n\n".join(
-            ocr_pages
-        ).strip()
+        return "\n\n".join(pages).strip()
 
     except Exception as exc:
         raise HTTPException(
@@ -85,22 +64,41 @@ def extract_pdf_text(file_bytes: bytes) -> str:
 
 
 def extract_docx_text(file_bytes: bytes) -> str:
-    """Extract text from a DOCX file."""
 
     try:
         document = Document(
             BytesIO(file_bytes)
         )
 
-        paragraphs = [
-            paragraph.text.strip()
-            for paragraph in document.paragraphs
-            if paragraph.text.strip()
-        ]
+        paragraphs = []
 
-        return "\n".join(
-            paragraphs
-        ).strip()
+        for paragraph in document.paragraphs:
+
+            text = paragraph.text.strip()
+
+            if text:
+                paragraphs.append(text)
+
+        # Also extract text from tables
+        for table in document.tables:
+
+            for row in table.rows:
+
+                row_text = []
+
+                for cell in row.cells:
+
+                    text = cell.text.strip()
+
+                    if text:
+                        row_text.append(text)
+
+                if row_text:
+                    paragraphs.append(
+                        " | ".join(row_text)
+                    )
+
+        return "\n".join(paragraphs).strip()
 
     except Exception as exc:
         raise HTTPException(
@@ -110,15 +108,16 @@ def extract_docx_text(file_bytes: bytes) -> str:
 
 
 def extract_txt_text(file_bytes: bytes) -> str:
-    """Extract text from a TXT file."""
 
     try:
+
         return file_bytes.decode(
             "utf-8",
             errors="replace",
         ).strip()
 
     except Exception as exc:
+
         raise HTTPException(
             status_code=400,
             detail=f"Unable to read TXT: {exc}",
@@ -127,31 +126,23 @@ def extract_txt_text(file_bytes: bytes) -> str:
 
 @router.post("/extract")
 async def extract_resume(
-    file: UploadFile = File(...),
+    file: UploadFile = File(...)
 ):
-    """
-    Extract resume text from PDF, DOCX, or TXT.
-
-    PDF extraction uses PyMuPDF first and
-    Tesseract OCR for scanned/image-only PDFs.
-    """
 
     filename = file.filename or ""
 
     extension = (
-        filename.lower()
-        .rsplit(".", 1)[-1]
+        filename.lower().rsplit(".", 1)[-1]
         if "." in filename
         else ""
     )
 
-    allowed_extensions = {
+    if extension not in {
         "pdf",
         "docx",
         "txt",
-    }
+    }:
 
-    if extension not in allowed_extensions:
         raise HTTPException(
             status_code=400,
             detail=(
@@ -163,12 +154,14 @@ async def extract_resume(
     file_bytes = await file.read()
 
     if not file_bytes:
+
         raise HTTPException(
             status_code=400,
             detail="The uploaded file is empty.",
         )
 
     if len(file_bytes) > MAX_FILE_SIZE:
+
         raise HTTPException(
             status_code=413,
             detail=(
@@ -178,37 +171,38 @@ async def extract_resume(
         )
 
     if extension == "pdf":
+
         text = extract_pdf_text(
             file_bytes
         )
 
     elif extension == "docx":
+
         text = extract_docx_text(
             file_bytes
         )
 
     else:
+
         text = extract_txt_text(
             file_bytes
         )
 
     if not text:
+
         raise HTTPException(
             status_code=422,
             detail=(
-                "No readable text was found in this file. "
-                "OCR could not extract any text."
+                "No readable text was found "
+                "in this file. OCR could not "
+                "extract any text."
             ),
         )
-
-    word_count = len(
-        text.split()
-    )
 
     return {
         "success": True,
         "filename": filename,
         "text": text,
-        "word_count": word_count,
+        "word_count": len(text.split()),
         "file_type": extension,
     }
