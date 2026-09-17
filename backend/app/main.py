@@ -7,6 +7,12 @@ from fastapi.responses import FileResponse
 from .api.nlp import router as nlp_router
 from .api.jd_checker import router as jd_checker_router
 from .api.optimizer import router as optimizer_router
+from app.routers.resume_parser import router as resume_parser_router
+
+app.include_router(
+    resume_parser_router,
+    prefix="/api"
+)
 
 
 app = FastAPI(
